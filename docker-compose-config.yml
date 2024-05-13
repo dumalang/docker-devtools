@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  consul:
+    container_name: consul
+    image: hashicorp/consul
+    environment:
+      CONSUL_BIND_INTERFACE: eth0
+    ports:
+      - '8500:8500'

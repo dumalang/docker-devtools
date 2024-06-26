@@ -8,3 +8,8 @@ services:
       CONSUL_BIND_INTERFACE: eth0
     ports:
       - '8500:8500'
+  nodered:
+    container_name: nodered
+    image: nodered/node-red
+    ports:
+      - '1880:1880'

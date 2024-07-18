@@ -13,3 +13,5 @@ services:
     image: nodered/node-red
     ports:
       - '1880:1880'
+    volumes:
+      - ./data-nodered:/data-nodered

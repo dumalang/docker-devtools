@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  consul:
+    image: hashicorp/consul:1.15
+    container_name: consul
+    ports:
+      - "8500:8500"  # Consul UI
+      - "8600:8600/udp"
+    command: agent -dev -client=0.0.0.0
+    networks:
+      - vaultnet
+
+  vault:
+    image: hashicorp/vault:1.15
+    container_name: vault
+    ports:
+      - "8201:8200"  # Vault UI
+    environment:
+      VAULT_ADDR: http://0.0.0.0:8201
+      VAULT_API_ADDR: http://vault:8200
+      VAULT_LOCAL_CONFIG: |
+        storage "consul" {
+          address = "http://consul:8500"
+          path    = "vault/"
+        }
+
+        listener "tcp" {
+          address     = "0.0.0.0:8201"
+          tls_disable = 1
+        }
+
+        ui = true
+    depends_on:
+      - consul
+    cap_add:
+      - IPC_LOCK
+    networks:
+      - vaultnet
+
+networks:
+  vaultnet:
+    driver: bridge

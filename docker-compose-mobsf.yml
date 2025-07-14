@@ -1,0 +1,8 @@
+version: '3'
+services:
+  mobsf:
+    image: opensecurity/mobile-security-framework-mobsf:latest
+    ports:
+      - "9092:8000"
+    volumes:
+      - ./mobsf_data:/root/.MobSF

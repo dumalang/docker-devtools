@@ -17,6 +17,8 @@ services:
       - './data/mariadb/data:/var/lib/mysql'
       - './data/mariadb/my.cnf:/etc/mysql/conf.d/my.cnf'
       - './data/mariadb/sql:/docker-entrypoint-initdb.d'
+    networks:
+      - app-network
   mysql8:
     container_name: mysql8
     image: mysql:8.0
@@ -34,6 +36,9 @@ services:
       - './data/mysql/data:/var/lib/mysql'
       - './data/mysql/my.cnf:/etc/mysql/conf.d/my.cnf'
       - './data/mysql/sql:/docker-entrypoint-initdb.d'
+    networks:
+      - app-network
+
   redis:
     image: redis
     container_name: redis
@@ -43,3 +48,9 @@ services:
     volumes:
       - ./data/redis/data:/data
       - ./data/redis/redis.conf:/usr/local/etc/redis/redis.conf
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

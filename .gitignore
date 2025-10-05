@@ -3,6 +3,5 @@ data
 .env
 data-nodered
 mage_project
-kong
-elk
+./kong
 mobsf_data

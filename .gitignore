@@ -5,3 +5,6 @@ data-nodered
 mage_project
 ./kong
 mobsf_data
+zookeeper_data
+zookeeper_logs
+kafka_data
